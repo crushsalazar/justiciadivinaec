@@ -1,0 +1,187 @@
+/* Estilos base */
+body {
+  font-family: 'Raleway', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f7f7f7;
+}
+
+/* Contenedor de la navegación */
+.nav-primary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #000000;
+  padding: 3px 20px;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  z-index: 1000;
+}
+
+/* Logo */
+.nav-primary .logo img {
+  height: 40px;
+}
+
+/* Menú principal */
+.nav-primary ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Cada item de menú se posiciona de forma relativa para ubicar el submenu */
+.nav-primary li {
+  position: relative;
+}
+
+/* Enlaces del menú: tipografía delgada y profesional */
+.nav-primary a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 300;
+  font-size: 1rem;
+  padding: 4px 8px;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-primary a:hover {
+  color: #FFD700;
+  border-bottom: 2px solid #FFD700;
+}
+
+/* Menú de hamburguesa: oculto en pantallas grandes */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.menu-toggle div {
+  width: 25px;
+  height: 3px;
+  background-color: #ffffff;
+  margin: 3px 0;
+  transition: all 0.3s ease;
+}
+
+/* Submenú: Se fuerza fondo negro completo y opacidad total */
+.nav-primary ul li .submenu {
+  display: none; /* Se oculta por defecto */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #000000 !important;
+  padding: 10px 0;
+  margin: 0;
+  list-style: none;
+  min-width: 180px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  opacity: 1; /* Asegura que no tenga transparencia */
+}
+
+.nav-primary ul li .submenu li {
+  display: block;
+  text-align: left;
+}
+
+.nav-primary ul li .submenu li a {
+  padding: 10px 20px;
+  color: #ffffff;
+  display: block;
+  transition: background-color 0.3s ease;
+}
+
+.nav-primary ul li .submenu li a:hover {
+  background-color: rgba(255, 215, 0, 0.1);
+}
+
+/* Mostrar el submenu al pasar el cursor sobre el item padre */
+.nav-primary ul li:hover > .submenu {
+  display: block;
+}
+
+/* Responsive: en dispositivos móviles se conserva el fondo negro para el menú */
+@media (max-width: 768px) {
+  .nav-primary ul {
+    display: none;
+    flex-direction: column;
+    background-color: #000000;
+    position: absolute;
+    top: 50px; /* Ajusta según la altura del nav */
+    right: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+  }
+  .nav-primary ul.active {
+    display: flex;
+  }
+  .menu-toggle {
+    display: flex;
+  }
+  
+  .submenu {
+    display: none !important;
+    width: 100% !important;
+    background-color: #2d2d2d !important;
+    position: relative !important;
+    margin: 5px 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    animation: none !important;
+  }
+
+  .dropdown.active .submenu {
+    display: block !important;
+    opacity: 1 !important;
+    max-height: none !important;
+    transform: none !important;
+  }
+
+  .submenu li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .submenu li a {
+    padding: 12px 25px !important;
+    text-align: center !important;
+    font-size: 0.9em !important;
+    color: #fff !important;
+  }
+
+  .dropdown-indicator {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+  
+  .dropdown-indicator.open {
+    transform: rotate(180deg);
+  }
+  
+}
+
+
+
+.dropdown-indicator {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.dropdown:hover .dropdown-indicator {
+  transform: rotate(180deg);
+}
+.dropdown-indicator {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .dropdown:hover .dropdown-indicator {
+    transform: rotate(180deg);
+  }
+}

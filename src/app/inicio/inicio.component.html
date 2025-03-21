@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Justicia Divina | Your Trusted Law Firm</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet">
+    <link rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  </head>
+
+  <body class="font-sans bg-gray-50">
+    <!-- Header Section -->
+    <header class="bg-[#800020] text-white">
+      <nav
+        class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="text-2xl font-bold text-[#FFD700]">Justicia
+          Divina</a>
+        <div class="hidden md:flex space-x-6 nav-links">
+          <a href="#home" class="hover:text-[#FFD700] transition">Home</a>
+          <a href="#services"
+            class="hover:text-[#FFD700] transition">Services</a>
+          <a href="#about" class="hover:text-[#FFD700] transition">About Us</a>
+          <a href="#contact" class="hover:text-[#FFD700] transition">Contact</a>
+        </div>
+        <!-- Botón de menú: solo se muestra en móviles -->
+        <button id="menuBtn" (click)="toggleMenu()">
+          <ng-container *ngIf="menuOpen; else closedIcon">
+            <i class="fas fa-times text-2xl"></i>
+          </ng-container>
+          <ng-template #closedIcon>
+            <i class="fas fa-bars text-xl"></i>
+          </ng-template>
+        </button>
+
+      </nav>
+    </header>
+
+    <!-- Menú móvil (solo visible en pantallas pequeñas) -->
+    <div id="mobileMenu" [class.open]="menuOpen">
+      <nav class="flex flex-col items-center justify-center h-full space-y-4">
+        <a href="#home" (click)="toggleMenu()"
+          class="hover:text-[#FFD700] transition">Home</a>
+        <a href="#services" (click)="toggleMenu()"
+          class="hover:text-[#FFD700] transition">Services</a>
+        <a href="#about" (click)="toggleMenu()"
+          class="hover:text-[#FFD700] transition">About Us</a>
+        <a href="#contact" (click)="toggleMenu()"
+          class="hover:text-[#FFD700] transition">Contact</a>
+      </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main class="space-y-24">
+      <!-- Hero Section -->
+      <section id="home" class="relative h-[600px] bg-cover bg-center"
+        style="background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3')">
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div class="relative container mx-auto px-6 h-full flex items-center">
+          <div class="text-white max-w-2xl">
+            <h1 class="text-5xl font-bold mb-6">Experto en soluciones
+              legales</h1>
+            <p class="text-xl mb-8">Servicios jurídicos profesionales adaptados
+              a sus necesidades</p>
+            <button onclick="openForm()"
+              class="bg-[#FFD700] text-[#800020] px-8 py-4 rounded-lg font-bold hover:bg-yellow-500 transition">
+              Iniciar consulta</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Modal Section -->
+      <div id="consultationForm"
+        class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+        <div class="relative bg-white rounded-lg p-8 w-full max-w-md">
+          <form id="multiStepForm" class="space-y-4">
+            <div class="step" data-step="1">
+              <h3 class="text-xl font-bold mb-4">Informacion personal</h3>
+              <input type="text" id="name" placeholder="Full Name"
+                class="w-full p-2 border rounded" required>
+              <input type="tel" id="phone" placeholder="Phone Number"
+                class="w-full p-2 border rounded mt-2" required>
+            </div>
+            <div class="step hidden" data-step="2">
+              <h3 class="text-xl font-bold mb-4">Documento de identidad</h3>
+              <input type="text" id="cpf_cnpj" placeholder="CPF/CNPJ"
+                class="w-full p-2 border rounded" required>
+            </div>
+            <div class="step hidden" data-step="3">
+              <h3 class="text-xl font-bold mb-4">Detalles del caso</h3>
+              <textarea id="caseDetails" placeholder="Describe your situation"
+                class="w-full p-2 border rounded h-32" required></textarea>
+            </div>
+            <div class="step hidden" data-step="4">
+              <h3 class="text-xl font-bold mb-4">Area del derecho</h3>
+              <select id="lawArea" class="w-full p-2 border rounded" required>
+                <option value>Seleccionar area</option>
+                <option value="civil">Derecho penal</option>
+                <option value="social">Seguridad social</option>
+                <option value="labor">Derecho laboral</option>
+              </select>
+            </div>
+            <div class="flex justify-between">
+              <button type="button" onclick="prevStep()" id="prevBtn"
+                class="hidden bg-gray-500 text-white px-4 py-2 rounded">Anterior</button>
+              <button type="button" onclick="nextStep()" id="nextBtn"
+                class="bg-[#800020] text-white px-4 py-2 rounded">Siguiente</button>
+              <button type="submit" id="submitBtn"
+                class="hidden bg-[#800020] text-white px-4 py-2 rounded">Aceptar</button>
+            </div>
+          </form>
+          <button (click)="closeForm()"
+            class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Services Section -->
+      <section id="services" class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+          <h2
+            class="text-4xl font-bold text-center text-[#800020] mb-16">Nuestros
+            servicios legales</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div
+              class="text-center p-6 border rounded-lg hover:shadow-lg transition">
+              <i class="fas fa-balance-scale text-4xl text-[#800020] mb-4"></i>
+              <h3 class="text-xl font-bold mb-4">Derecho civil</h3>
+              <p class="text-gray-600">Representación pericial en litigios y
+                disputas civiles.</p>
+            </div>
+            <div
+              class="text-center p-6 border rounded-lg hover:shadow-lg transition">
+              <i class="fas fa-gavel text-4xl text-[#800020] mb-4"></i>
+              <h3 class="text-xl font-bold mb-4">Derecho social</h3>
+              <p class="text-gray-600">Asistencia profesional con reclamaciones
+                de seguridad social.</p>
+            </div>
+            <div
+              class="text-center p-6 border rounded-lg hover:shadow-lg transition">
+              <i class="fas fa-briefcase text-4xl text-[#800020] mb-4"></i>
+              <h3 class="text-xl font-bold mb-4">Derecho laboral</h3>
+              <p class="text-gray-600">Apoyo integral en materia laboral.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+
+
+
+      <section class="testimonials py-24 bg-gray-100">
+        <div class="container mx-auto px-6">
+          <h2
+            class="text-4xl font-bold text-center text-[#800020] mb-16">SERVICIOS LEGALES EN LÍNEA</h2>
+          <ngb-carousel [interval]="3000" [pauseOnHover]="false"
+    [showNavigationArrows]="true" [showNavigationIndicators]="true" class="custom-carousel">
+    
+    <ng-template ngbSlide>
+        <div class="carousel-slide">
+            <img src="https://i.postimg.cc/63g1dS7B/d.jpg" alt="Imagen 1" class="d-block w-100 zoom-img">
+            <div class="carousel-caption">
+                <h2 class="title">Bienvenido a Nuestra Firma</h2>
+                <p class="description">Soluciones legales de alto nivel para tu tranquilidad.</p>
+                <a href="https://wa.me/0979022110?text=Quiero%20más%20información,%20señor%20abogado%20nivel%20Dios" 
+                   class="btn-info">Más Información</a>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template ngbSlide>
+        <div class="carousel-slide">
+            <img src="https://i.postimg.cc/q7BY02VH/e.jpg" alt="Imagen 2" class="d-block w-100 zoom-img">
+            <div class="carousel-caption">
+                <h2 class="title">Expertos en Derecho</h2>
+                <p class="description">Defendemos tus derechos con pasión y compromiso.</p>
+                <a href="https://wa.me/0979022110?text=Quiero%20más%20información,%20señor%20abogado%20nivel%20Dios" 
+                   class="btn-info">Más Información</a>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template ngbSlide>
+        <div class="carousel-slide">
+            <img src="https://i.postimg.cc/VkWT3DhF/f.jpg" alt="Imagen 3" class="d-block w-100 zoom-img">
+            <div class="carousel-caption">
+                <h2 class="title">Tu Futuro Seguro</h2>
+                <p class="description">Asesoría legal con profesionalismo y ética.</p>
+                <a href="https://wa.me/0979022110?text=Quiero%20más%20información,%20señor%20abogado%20nivel%20Dios" 
+                   class="btn-info">Más Información</a>
+            </div>
+        </div>
+    </ng-template>
+
+</ngb-carousel>
+
+        </div>
+      </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!-- Testimonials Section -->
+      <section class="testimonials py-24 bg-gray-100">
+        <div class="container mx-auto px-6">
+          <h2
+            class="text-4xl font-bold text-center text-[#800020] mb-16">Testimonios
+            de clientes</h2>
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide text-center p-6 bg-white rounded-lg">
+                <p
+                  class="text-gray-600 mb-4">"Excelente servicio y equipo profesional."</p>
+                <p class="font-bold">- Guillermo Verdugo</p>
+              </div>
+              <div class="swiper-slide text-center p-6 bg-white rounded-lg">
+                <p
+                  class="text-gray-600 mb-4">"Muy solidario en todo mi caso".</p>
+                <p class="font-bold">- Jared Specter</p>
+              </div>
+              <div class="swiper-slide text-center p-6 bg-white rounded-lg">
+                <p
+                  class="text-gray-600 mb-4">"Muy recomendable para asuntos legales."</p>
+                <p class="font-bold">- Mike Ross</p>
+              </div>
+            </div>
+            <!-- Swiper Pagination -->
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Us Section -->
+      <section id="about" class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+          <h2 class="text-4xl font-bold text-center text-[#800020] mb-16">
+            Acerca de nuestra firma</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+              <h3 class="text-2xl font-bold">Nuestra Historia</h3>
+              <p class="text-gray-600">
+                Fundada en 1995, hemos estado brindando servicios legales
+                excepcionales durante más de 25 años, ganándonos una reputación
+                de excelencia.</p>
+              <h3 class="text-2xl font-bold">Nuestra Misión</h3>
+              <p class="text-gray-600">Nos esforzamos por brindar justicia y
+                proteger los derechos de nuestros clientes a través de una
+                representación legal profesional y personalizada.</p>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <img
+                src="https://images.unsplash.com/photo-1589391886645-d51941baf7fb"
+                alt="Office" class="rounded-lg">
+              <img
+                src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f"
+                alt="Team" class="rounded-lg">
+              <img
+                src="https://images.unsplash.com/photo-1606836576983-8b458e75221d"
+                alt="Meeting" class="rounded-lg">
+              <img
+                src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f"
+                alt="Consultation" class="rounded-lg">
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Carousel usando ng-bootstrap -->
+    <ngb-carousel [interval]="3000" [pauseOnHover]="false">
+      <ng-template ngbSlide>
+        <img class="d-block w-100" src="https://i.postimg.cc/63g1dS7B/d.jpg"
+          alt="First slide">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Slider One Item</h5>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime,
+            nulla, tempore. Deserunt excepturi quas vero.</p>
+        </div>
+      </ng-template>
+      <ng-template ngbSlide>
+        <img class="d-block w-100" src="https://i.postimg.cc/VkWT3DhF/f.jpg"
+          alt="Second slide">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Slider One Item</h5>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime,
+            nulla, tempore. Deserunt excepturi quas vero.</p>
+        </div>
+      </ng-template>
+      <ng-template ngbSlide>
+        <img class="d-block w-100" src="https://i.postimg.cc/ryRH88bs/c.jpg"
+          alt="Third slide">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Slider One Item</h5>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime,
+            nulla, tempore. Deserunt excepturi quas vero.</p>
+        </div>
+      </ng-template>
+    </ngb-carousel>
+
+    
+
+    <a
+      href="https://api.whatsapp.com/send?phone=593979022110&text=Quiero%20mas%20informacion,%20se%C3%B1or%20abogado%20nivel%20Dios"
+      class="whatsapp-float"
+      target="_blank">
+      <svg class="whatsapp-icon" viewBox="0 0 32 32">
+        <path fill="#ffffff"
+          d="M19.1 18.8c-.3-.1-.6-.1-.9-.2-.3 0-.6-.1-.8-.3-.3-.1-.6-.3-.9-.5-1-.7-1.8-1.6-2.4-2.6-.3-.5-.6-1-.7-1.5-.1-.3-.1-.6-.1-.9s.1-.6.2-.9.2-.6.4-.8c.1-.2.1-.3 0-.5-.1-.1-.2-.2-.4-.3-.2-.1-.4-.2-.6-.3-.2-.1-.3-.1-.5 0s-.3.1-.5.2c-.5.4-.8.9-1 1.5s-.2 1.2-.1 1.8c.1.7.4 1.3.7 1.9.5.9 1.2 1.7 2 2.5 1.1 1 2.3 1.8 3.7 2.3.5.2 1.1.3 1.6.4s1.1.1 1.6 0c.6-.1 1.1-.4 1.5-.9.1-.2.2-.3.2-.5s-.1-.3-.2-.4c-.2-.2-.4-.3-.7-.4zM16 3.2c-7 0-12.8 5.7-12.8 12.8 0 2.3.6 4.5 1.7 6.5l-2.1 6.3 6.5-2c1.9 1 4 1.6 6.2 1.6 7 0 12.8-5.7 12.8-12.8S23 3.2 16 3.2zm0 23.1c-2 0-3.9-.5-5.7-1.4l-4 .9 1.1-4.1c-1.1-1.7-1.7-3.8-1.7-5.9 0-6 4.8-10.8 10.8-10.8s10.8 4.8 10.8 10.8-4.9 10.8-10.9 10.8z" />
+      </svg>
+    </a>
+
+    <!-- Footer Section -->
+    <footer class="bg-[#800020] text-white py-12">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-xl font-bold mb-4">Excelencia Jurídica</h3>
+            <p>Su socio de confianza en asuntos legales.</p>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-4">Contacto</h3>
+            <p>Azogues<br>Ecuador, Chiquipata</p>
+            <p>Telefono: (555) 123-4567<br>Email: infolegalexcellence.com</p>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-4">Siguenos</h3>
+            <div class="flex space-x-4">
+              <a href="#" class="hover:text-[#FFD700]"><i
+                  class="fab fa-facebook"></i></a>
+              <a href="#" class="hover:text-[#FFD700]"><i
+                  class="fab fa-instagram"></i></a>
+              <a href="#" class="hover:text-[#FFD700]"><i
+                  class="fab fa-linkedin"></i></a>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-4">Horarios de oficina</h3>
+            <p>Lunes - Viernes: 9:00 AM - 6:00 PM<br>Sabados: Con cita
+              previa<br>Domingo: Cerrado</p>
+          </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+          <p>© 2024 Excelencia Legal. Todos los derechos reservados.</p>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+
+</html>

@@ -1,0 +1,43 @@
+<nav class="nav-primary">
+  <!-- Logo a la izquierda -->
+  <a routerLink="/" class="logo">
+    <img src="https://i.postimg.cc/L58p9qcW/pngegg.png" alt="Logo">
+  </a>
+
+  <!-- Botón de menú de hamburguesa (se muestra en móviles) -->
+  <div class="menu-toggle" (click)="toggleMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <!-- Menú de navegación -->
+  <ul id="menu">
+    <li><a routerLink="/inicio">Inicio</a></li>
+    <!-- Item con submenú -->
+    <li class="dropdown" [class.active]="activeDropdown === 'areas'">
+      <!-- En dispositivos sin hover (móviles) se ejecuta el evento click,
+           en computadoras no se asocia (se usa hover en CSS) -->
+      <a routerLink="/Areas" (click)="isMobile ? rotateArrow($event) : null">
+        Áreas prácticas
+        <!-- Se aplica el binding de estilo de la rotación solo para móviles -->
+        <span class="dropdown-indicator" [style.transform]="isMobile ? 'rotate(' + rotation + 'deg)' : null">
+          ▼
+        </span>
+      </a>
+      <ul class="submenu">
+        <li><a routerLink="/area1">Submenú 1</a></li>
+        <li><a routerLink="/area2">Submenú 2</a></li>
+        <li><a routerLink="/area3">Submenú 3</a></li>
+        <li><a routerLink="/area4">Submenú 4</a></li>
+      </ul>
+    </li>
+    
+    
+    <li><a routerLink="/Servicios">Servicios en línea</a></li>
+    <li><a routerLink="/Soceidades">Sociedades en acciones</a></li>
+    <li><a routerLink="/Articulos">Artículos</a></li>
+    <li><a routerLink="/Servicios">Servicios legales</a></li>
+    <li><a routerLink="/Contactos">Contactos</a></li>
+  </ul>
+</nav>
